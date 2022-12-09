@@ -1,4 +1,10 @@
 #include <Arduino.h>
+#include <BluetoothSerial.h>
+#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
+#error Bluetooth is not enabled! Please run `make menuconfig` to configure it.
+#endif
+BluetoothSerial SerialBT;
+
 //GPIO Assignments
 ///Buttons
   #define BTN_1 17
@@ -12,6 +18,7 @@
   #define ROTE2_BTN 33
   #define ROTE3_BTN 25
   #define ROTE4_BTN 19
+
 ///Rotary Encoder
   #define ROTE1_A 36
   #define ROTE1_B 39
@@ -21,6 +28,7 @@
   #define ROTE3_B 26
   #define ROTE4_A 5
   #define ROTE4_B 18
+
 ///Variables
   int aState1;
   int aState2;
@@ -32,6 +40,7 @@
   int alastState4;
 
 void setup() {
+  SerialBT.begin("ESP32_BTN_TEST"); //Bluetooth device name
   Serial.begin(115200);
   pinMode(BTN_1, INPUT);
   pinMode(BTN_2, INPUT);
@@ -58,41 +67,54 @@ void setup() {
   alastState2 = digitalRead(ROTE2_A);
   alastState3 = digitalRead(ROTE3_A);
   alastState4 = digitalRead(ROTE4_A);  
+
+  SerialBT.println("Bluetooth device is ready, waiting for connections...");
   }
 
 void loop() {
   if (digitalRead(BTN_1) == HIGH) {
     Serial.println("Button 1 pressed");
+    SerialBT.println("Button 1 pressed");
   }
   else if (digitalRead(BTN_2) == HIGH) {
     Serial.println("Button 2 pressed");
+    SerialBT.println("Button 2 pressed");
   }
   else if (digitalRead(BTN_3) == HIGH) {
     Serial.println("Button 3 pressed");
+    SerialBT.println("Button 3 pressed");
   }
   else if (digitalRead(BTN_4) == HIGH) {
     Serial.println("Button 4 pressed");
+    SerialBT.println("Button 4 pressed");
   }
   else if (digitalRead(BTN_5) == HIGH) {
     Serial.println("Button 5 pressed");
+    SerialBT.println("Button 5 pressed");
   }
   else if (digitalRead(BTN_6) == HIGH) {
     Serial.println("Button 6 pressed");
+    SerialBT.println("Button 6 pressed");
   }
   else if (digitalRead(BTN_7) == HIGH) {
     Serial.println("Button 7 pressed");
+    SerialBT.println("Button 7 pressed");
   }
   else if (digitalRead(ROTE1_BTN) == HIGH) {
     Serial.println("Rotary 1 button pressed");
+    SerialBT.println("Rotary 1 button pressed");
   }
   else if (digitalRead(ROTE2_BTN) == HIGH) {
     Serial.println("Rotary 2 button pressed");
+    SerialBT.println("Rotary 2 button pressed");
   }
   else if (digitalRead(ROTE3_BTN) == HIGH) {
     Serial.println("Rotary 3 button pressed");
+    SerialBT.println("Rotary 3 button pressed");
   }
   else if (digitalRead(ROTE4_BTN) == HIGH) {
     Serial.println("Rotary 4 button pressed");
+    SerialBT.println("Rotary 4 button pressed");
   }
   else {
     //Read state of rotary encoder
@@ -104,33 +126,41 @@ void loop() {
     if (aState1 != alastState1) {
       if (digitalRead(ROTE1_B) != aState1) {
         Serial.println("Rotary 1 turned clockwise");
+        SerialBT.println("Rotary 1 turned clockwise");
       }
       else {
         Serial.println("Rotary 1 turned counterclockwise");
+        SerialBT.println("Rotary 1 turned counterclockwise");
       }
     }
     if (aState2 != alastState2) {
       if (digitalRead(ROTE2_B) != aState2) {
         Serial.println("Rotary 2 turned clockwise");
+        SerialBT.println("Rotary 2 turned clockwise");
       }
       else {
         Serial.println("Rotary 2 turned counterclockwise");
+        SerialBT.println("Rotary 2 turned counterclockwise");
       }
     }
     if (aState3 != alastState3) {
       if (digitalRead(ROTE3_B) != aState3) {
         Serial.println("Rotary 3 turned clockwise");
+        SerialBT.println("Rotary 3 turned clockwise");
       }
       else {
         Serial.println("Rotary 3 turned counterclockwise");
+        SerialBT.println("Rotary 3 turned counterclockwise");
       }
     }
     if (aState4 != alastState4) {
       if (digitalRead(ROTE4_B) != aState4) {
         Serial.println("Rotary 4 turned clockwise");
+        SerialBT.println("Rotary 4 turned clockwise");
       }
       else {
         Serial.println("Rotary 4 turned counterclockwise");
+        SerialBT.println("Rotary 4 turned counterclockwise");
       }
     }
     //Update last state of rotary encoder
