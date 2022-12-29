@@ -10,19 +10,19 @@ BluetoothSerial SerialBT;
   #define BTN_1 17
   #define BTN_2 16
   #define BTN_3 13
-  #define BTN_4 15
-  #define BTN_5 2
+  #define BTN_4 4
+  #define BTN_5 15
   #define BTN_6 12
   #define BTN_7 14
-  #define ROTE1_BTN 34
-  #define ROTE2_BTN 33
+  #define ROTE1_BTN 36
+  #define ROTE2_BTN 35
   #define ROTE3_BTN 25
   #define ROTE4_BTN 19
 
 ///Rotary Encoder
-  #define ROTE1_A 36
+  #define ROTE1_A 34
   #define ROTE1_B 39
-  #define ROTE2_A 35
+  #define ROTE2_A 33
   #define ROTE2_B 32
   #define ROTE3_A 27
   #define ROTE3_B 26
@@ -51,8 +51,8 @@ void setup() {
   pinMode(BTN_7, INPUT);
   pinMode(ROTE1_BTN, INPUT);
   pinMode(ROTE2_BTN, INPUT);
-  pinMode(ROTE3_BTN, INPUT);
-  pinMode(ROTE4_BTN, INPUT);
+  pinMode(ROTE3_BTN, INPUT_PULLUP);
+  pinMode(ROTE4_BTN, INPUT_PULLUP);
   pinMode(ROTE1_A, INPUT);
   pinMode(ROTE1_B, INPUT);
   pinMode(ROTE2_A, INPUT);
@@ -100,19 +100,19 @@ void loop() {
     Serial.println("Button 7 pressed");
     SerialBT.println("Button 7 pressed");
   }
-  else if (digitalRead(ROTE1_BTN) == HIGH) {
+  else if (digitalRead(ROTE1_BTN) == LOW) {
     Serial.println("Rotary 1 button pressed");
     SerialBT.println("Rotary 1 button pressed");
   }
-  else if (digitalRead(ROTE2_BTN) == HIGH) {
+  else if (digitalRead(ROTE2_BTN) == LOW) {
     Serial.println("Rotary 2 button pressed");
     SerialBT.println("Rotary 2 button pressed");
   }
-  else if (digitalRead(ROTE3_BTN) == HIGH) {
+  else if (digitalRead(ROTE3_BTN) == LOW) {
     Serial.println("Rotary 3 button pressed");
     SerialBT.println("Rotary 3 button pressed");
   }
-  else if (digitalRead(ROTE4_BTN) == HIGH) {
+  else if (digitalRead(ROTE4_BTN) == LOW) {
     Serial.println("Rotary 4 button pressed");
     SerialBT.println("Rotary 4 button pressed");
   }
